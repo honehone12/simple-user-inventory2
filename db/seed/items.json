@@ -1,0 +1,118 @@
+[
+    {
+      "name": "The Sword of Light",
+      "type": "weapon",
+      "description": "A magical sword that is said to be able to cut through anything."
+    },
+    {
+      "name": "The Crown of Power",
+      "type": "armor",
+      "description": "A crown that grants the wearer great power."
+    },
+    {
+      "name": "The Orb of Wisdom",
+      "type": "accessory",
+      "description": "An orb that grants the wearer great wisdom."
+    },
+    {
+      "name": "The Staff of Life",
+      "type": "weapon",
+      "description": "A staff that can heal the wounds of others."
+    },
+    {
+      "name": "The Shield of Protection",
+      "type": "armor",
+      "description": "A shield that can protect the wearer from harm."
+    },
+    {
+      "name": "The Boots of Speed",
+      "type": "accessory",
+      "description": "A pair of boots that grant the wearer great speed."
+    },
+    {
+      "name": "The Cloak of Invisibility",
+      "type": "accessory",
+      "description": "A cloak that grants the wearer the power of invisibility."
+    },
+    {
+      "name": "The Ring of Fire",
+      "type": "accessory",
+      "description": "A ring that can shoot fireballs."
+    },
+    {
+      "name": "The Gauntlets of Strength",
+      "type": "armor",
+      "description": "A pair of gauntlets that grant the wearer great strength."
+    },
+    {
+      "name": "The Helmet of Heroism",
+      "type": "armor",
+      "description": "A helmet that grants the wearer the power of heroism."
+    },
+    {
+      "name": "The Sword of Darkness",
+      "type": "weapon",
+      "description": "A magical sword that is said to be able to cut through the darkness."
+    },
+    {
+      "name": "The Crown of Darkness",
+      "type": "armor",
+      "description": "A crown that grants the wearer great power over darkness."
+    },
+    {
+      "name": "The Orb of Darkness",
+      "type": "accessory",
+      "description": "An orb that grants the wearer great wisdom of darkness."
+    },
+    {
+      "name": "The Staff of Darkness",
+      "type": "weapon",
+      "description": "A staff that can heal the wounds of others with darkness."
+    },
+    {
+      "name": "The Shield of Darkness",
+      "type": "armor",
+      "description": "A shield that can protect the wearer from darkness."
+    },
+    {
+      "name": "The Boots of Darkness",
+      "type": "accessory",
+      "description": "A pair of boots that grant the wearer great speed of darkness."
+    },
+    {
+      "name": "The Cloak of Darkness",
+      "type": "accessory",
+      "description": "A cloak that grants the wearer the power of invisibility of darkness."
+    },
+    {
+      "name": "The Ring of Darkness",
+      "type": "accessory",
+      "description": "A ring that can shoot fireballs of darkness."
+    },
+    {
+      "name": "The Gauntlets of Darkness",
+      "type": "armor",
+      "description": "A pair of gauntlets that grant the wearer great strength of darkness."
+    },
+    {
+      "name": "The Helmet of Darkness",
+      "type": "armor",
+      "description": "A helmet that grants the wearer the power of heroism of darkness."
+    },
+    {
+      "name": "The Sword of Fire",
+      "type": "weapon",
+      "description": "A magical sword that is said to be able to cut through fire."
+    },
+    {
+      "name": "The Crown of Fire",
+      "type": "armor",
+      "description": "A crown that grants the wearer great power over fire."
+    },
+    {
+      "name": "The Orb of Fire",
+      "type": "accessory",
+      "description": "An orb that grants the wearer great power over fire."
+    }
+]
+  
