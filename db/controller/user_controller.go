@@ -14,10 +14,13 @@ func NewUserController(db *gorm.DB) UserController {
 	return UserController{db: db}
 }
 
-func (c UserController) Create(name string) error {
+func (c UserController) Create(name string) (*models.UserData, error) {
 	user := models.NewUser(name)
 	result := c.db.Create(user)
-	return result.Error
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &user.UserData, nil
 }
 
 func (c UserController) Read(uuid string) (*models.User, error) {

@@ -43,3 +43,7 @@ func (orm Orm) User() controller.UserController {
 func (orm Orm) Item() controller.ItemController {
 	return controller.NewItemController(orm.db)
 }
+
+func (orm Orm) ItemInfo() controller.ItemInfoController {
+	return controller.NewItemInfoController(orm.db)
+}

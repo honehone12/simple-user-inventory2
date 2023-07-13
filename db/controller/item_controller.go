@@ -14,17 +14,20 @@ func NewItemController(db *gorm.DB) ItemController {
 	return ItemController{db: db}
 }
 
-func (c ItemController) Create(name string) error {
+func (c ItemController) Create(name string) (*models.ItemData, error) {
 	item := models.NewItem(name)
 	result := c.db.Create(item)
-	return result.Error
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &item.ItemData, nil
 }
 
 func (c ItemController) Read(uuid string) (*models.Item, error) {
 	item := &models.Item{}
 	result := c.db.
 		Select(
-			"ID", "Name", "Uuid",
+			"ID", "CreatedAt", "UpdatedAt", "Name", "Uuid",
 		).
 		Where("uuid = ?", uuid).
 		Take(item)

@@ -2,14 +2,11 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 	"simple-user-inventory2/db"
 	"simple-user-inventory2/db/models"
-	"sync"
 
-	"github.com/google/uuid"
 	"github.com/joho/godotenv"
 )
 
@@ -38,31 +35,41 @@ func main() {
 		log.Fatal(err)
 	}
 
-	wg := sync.WaitGroup{}
+	orm, err := db.NewOrm()
+	if err != nil {
+		log.Fatal(err)
+	}
+	userCtrl := orm.User()
+	userLen := len(users)
+	userUuids := make([]string, userLen)
+	itemCtrl := orm.Item()
+	itemLen := len(items)
+	itemUuids := make([]string, itemLen)
 
-	for j := 0; j < 1; j++ {
-		orm, err := db.NewOrm()
+	for i := 0; i < userLen; i++ {
+		uData, err := userCtrl.Create(users[i].Name)
 		if err != nil {
 			log.Fatal(err)
 		}
-		userCtrl := orm.User()
-		userLen := len(users)
-		itemCtrl := orm.Item()
-		itemLen := len(items)
-
-		wg.Add(1)
-
-		go func() {
-			for i := 0; i < userLen; i++ {
-				userCtrl.Create(fmt.Sprintf("%s%s", users[i].Name, uuid.NewString()))
-			}
-			for i := 0; i < itemLen; i++ {
-				itemCtrl.Create(fmt.Sprintf("%s%s", items[i].Name, uuid.NewString()))
-			}
-			wg.Done()
-		}()
+		userUuids[i] = uData.Uuid
+	}
+	for i := 0; i < itemLen; i++ {
+		iData, err := itemCtrl.Create(items[i].Name)
+		if err != nil {
+			log.Fatal(err)
+		}
+		itemUuids[i] = iData.Uuid
 	}
 
-	wg.Wait()
+	itemInfoCtrl := orm.ItemInfo()
+	for i := 0; i < userLen; i++ {
+		for j := 0; j < itemLen; j++ {
+			err := itemInfoCtrl.Create(userUuids[i], itemUuids[j], 1)
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+	}
+
 	log.Println("seed done")
 }
