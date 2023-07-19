@@ -24,12 +24,12 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	users := make([]models.UserData, 0)
+	users := make([]models.UserMasterData, 0)
 	err = json.Unmarshal(userBytes, &users)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	items := make([]models.ItemData, 0)
+	items := make([]models.ItemMasterData, 0)
 	err = json.Unmarshal(itemBytes, &items)
 	if err != nil {
 		log.Fatalln(err)
@@ -61,31 +61,39 @@ func main() {
 		itemUuids[i] = iData.Uuid
 	}
 
-	itemInfoCtrl := orm.ItemInfo()
+	itemStateCtrl := orm.ItemState()
 	for i := 0; i < userLen; i++ {
 		for j := 0; j < itemLen; j++ {
-			err := itemInfoCtrl.Create(userUuids[i], itemUuids[j], 1)
+			err := itemStateCtrl.Create(userUuids[i], itemUuids[j], 1)
 			if err != nil {
 				log.Fatalln(err)
 			}
 		}
 	}
 
+	numTX := 0
+
 	for i := 0; i < userLen; i++ {
-		infos, err := itemInfoCtrl.ReadAllUserItems(userUuids[i])
+		states := []*[]models.ItemState{}
+		err := itemStateCtrl.ReadAllUserItems(userUuids[i], &states)
 		if err != nil {
 			log.Fatalln(err)
 		}
 
+		ptr := []uint{}
 		for j := 0; j < itemLen; j++ {
-			updated, err := itemInfoCtrl.UpdateAmount(infos[j].Uuid, infos[j].Amount+1)
-			if err != nil {
-				log.Fatalln(err)
-			}
+			for k := 0; k < 100; k++ {
+				err := itemStateCtrl.UpdateAmount((*states[j])[0].Uuid, 1, &ptr)
+				if err != nil {
+					log.Fatalln(err)
+				}
 
-			log.Printf("%v\n", *updated)
+				numTX++
+				(*states[j])[0].Amount = ptr[0]
+				log.Printf("%#v\n", states[j])
+			}
 		}
 	}
 
-	log.Println("seed done")
+	log.Printf("seed done, %d txs", numTX)
 }

@@ -5,22 +5,20 @@ import (
 	"gorm.io/gorm"
 )
 
-type ItemData struct {
+type ItemMasterData struct {
 	Name string `json:"name" gorm:"unique;not null;size:128"`
 	Uuid string `json:"uuid" gorm:"unique;uniqueIndex;not null;size:64"`
 }
 
-type Item struct {
+type ItemMaster struct {
 	gorm.Model
 
-	ItemData
-
-	ItemInfos []*ItemInfo
+	ItemMasterData
 }
 
-func NewItem(name string) *Item {
-	return &Item{
-		ItemData: ItemData{
+func NewItemMaster(name string) *ItemMaster {
+	return &ItemMaster{
+		ItemMasterData: ItemMasterData{
 			Name: name,
 			Uuid: uuid.NewString(),
 		},
